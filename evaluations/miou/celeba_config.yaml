@@ -1,0 +1,32 @@
+data:
+  type: imaginaire.datasets.paired_images
+  num_workers: 8
+  input_types:
+      - input_label:
+          ext: png
+          num_channels: 1
+          normalize: False
+          is_mask: True
+      - synthesized_image:
+          ext: jpg
+          num_channels: 3
+          normalize: True
+          use_dont_care: False
+  full_data_ops: imaginaire.model_utils.label::make_one_hot, imaginaire.model_utils.label::concat_labels
+  use_dont_care: True
+  one_hot_num_classes:
+      seg_maps: 19
+  input_labels:
+      - input_label
+  input_image:
+      - synthesized_image
+  val:
+      # Input LMDBs.
+      roots:
+          - /home/user/generated_samples
+      # Batch size per GPU.
+      batch_size: 4
+      # Data augmentations to be performed in given order.
+      augmentations:
+          # Crop size.
+          resize_h_w: 256, 256
