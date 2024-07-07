@@ -251,26 +251,36 @@ class GaussianDiffusion:
         :return: A noisy version of x_start.
         """            
         
-        classwise_gammas = None
-        if option.split('_')[2] == 'classwise':
-            t = _extract_into_tensor(self.timestep_map,t,t.shape).type(th.long)
-            B, _, H, W = x_start.shape
-            psiphi = th.from_numpy(self.psiphi).to(t.device).unsqueeze(0).repeat(B, 1)
-            log_psiphi = th.log(psiphi)
-            tmp = ((th.exp(log_psiphi*(t/1000).unsqueeze(1)) - 1.0)/(psiphi - 1.0 + 1e-7)).clamp(max=(t/1000).unsqueeze(1)).unsqueeze(1).unsqueeze(2)
-            classwise_gammas = 1.0 - (x_start.permute(0,2,3,1)*tmp).sum(dim=3)
+        if option[:8] == 'discrete':
+            classwise_gammas = None
+            if option.split('_')[2] == 'classwise':
+                t = _extract_into_tensor(self.timestep_map,t,t.shape).type(th.long)
+                B, _, H, W = x_start.shape
+                psiphi = th.from_numpy(self.psiphi).to(t.device).unsqueeze(0).repeat(B, 1)
+                log_psiphi = th.log(psiphi)
+                tmp = ((th.exp(log_psiphi*(t/1000).unsqueeze(1)) - 1.0)/(psiphi - 1.0 + 1e-7)).clamp(max=(t/1000).unsqueeze(1)).unsqueeze(1).unsqueeze(2)
+                classwise_gammas = 1.0 - (x_start.permute(0,2,3,1)*tmp).sum(dim=3)
 
-        x_start = x_start.permute(0,2,3,1)  # b c w h -> b w h c
-        if noise is None:
-            noise = th.rand((x_start.shape[0],x_start.shape[1],x_start.shape[2],1),device=x_start.device)
-        if option.split('_')[2] == 'classwise':
-            noise = classwise_gammas.unsqueeze(3) + noise
-        else:
-            noise = _extract_into_tensor(self.gammas, t, noise.shape) + noise
-        mask = noise.floor()
-        
-        return (x_start * mask).permute(0,3,1,2)
+            if option.split('_')[1] == 'zero':
+                x_start = x_start.permute(0,2,3,1)  # b c w h -> b w h c
+                if noise is None:
+                    noise = th.rand((x_start.shape[0],x_start.shape[1],x_start.shape[2],1),device=x_start.device)
+                if option.split('_')[2] == 'classwise':
+                    noise = classwise_gammas.unsqueeze(3) + noise
+                else:
+                    noise = _extract_into_tensor(self.gammas, t, noise.shape) + noise
+                mask = noise.floor()
+                return (x_start * mask).permute(0,3,1,2)
             
+        else:
+            if noise is None:
+                noise = th.randn_like(x_start)
+            assert noise.shape == x_start.shape
+            return (
+                _extract_into_tensor(self.sqrt_alphas_cumprod, t, x_start.shape) * x_start
+                + _extract_into_tensor(self.sqrt_one_minus_alphas_cumprod, t, x_start.shape)
+                * noise
+            )
 
     def q_posterior_mean_variance(self, x_start, x_t, t):
         """
