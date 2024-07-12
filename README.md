@@ -9,6 +9,13 @@ Official PyTorch implementation of "[Stochastic Conditional Diffusion Models for
 
 ![SCDM Motivation](./asset/motivation.png)
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/stochastic-conditional-diffusion-models-for/conditional-image-generation-on-celebamask-hq)](https://paperswithcode.com/sota/conditional-image-generation-on-celebamask-hq?p=stochastic-conditional-diffusion-models-for)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/stochastic-conditional-diffusion-models-for/image-to-image-translation-on-ade20k-labels)](https://paperswithcode.com/sota/image-to-image-translation-on-ade20k-labels?p=stochastic-conditional-diffusion-models-for)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/stochastic-conditional-diffusion-models-for/image-to-image-translation-on-coco-stuff)](https://paperswithcode.com/sota/image-to-image-translation-on-coco-stuff?p=stochastic-conditional-diffusion-models-for)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/stochastic-conditional-diffusion-models-for/noisy-semantic-image-synthesis-on-noisy)](https://paperswithcode.com/sota/noisy-semantic-image-synthesis-on-noisy?p=stochastic-conditional-diffusion-models-for)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/stochastic-conditional-diffusion-models-for/noisy-semantic-image-synthesis-on-noisy-1)](https://paperswithcode.com/sota/noisy-semantic-image-synthesis-on-noisy-1?p=stochastic-conditional-diffusion-models-for)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/stochastic-conditional-diffusion-models-for/noisy-semantic-image-synthesis-on-noisy-2)](https://paperswithcode.com/sota/noisy-semantic-image-synthesis-on-noisy-2?p=stochastic-conditional-diffusion-models-for)
+
 ## Setup
 - Clone repository
   
