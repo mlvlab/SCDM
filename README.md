@@ -1,6 +1,6 @@
 # Stochastic Conditional Diffusion Models for Robust Semantic Image Synthesis
 
-Official PyTorch implementation of "[Stochastic Conditional Diffusion Models for Robust Semantic Image Synthesis](https://arxiv.org/abs/2402.16506)" (ICML 2024).
+Official PyTorch implementation of "[Stochastic Conditional Diffusion Models for Robust Semantic Image Synthesis](https://arxiv.org/abs/2402.16506)" ([ICML 2024](https://proceedings.mlr.press/v235/ko24e.html)).
 > Juyeon Ko*, Inho Kong*, Dogyun Park, Hyunwoo J. Kim†. 
 > 
 > Department of Computer Science and Engineering, Korea University
@@ -177,12 +177,13 @@ This repository is built upon [guided-diffusion](https://github.com/openai/guide
 ## Citation
 If you use this work, please cite as:
 ```bibtex
-@article{ko2024stochastic,
-  title={Stochastic Conditional Diffusion Models for Robust Semantic Image Synthesis},
-  author={Ko, Juyeon and Kong, Inho and Park, Dogyun and Kim, Hyunwoo J},
-  journal={arXiv preprint arXiv:2402.16506},
-  year={2024}
+@InProceedings{pmlr-v235-ko24e,
+  title ={Stochastic Conditional Diffusion Models for Robust Semantic Image Synthesis},
+  author ={Ko, Juyeon and Kong, Inho and Park, Dogyun and Kim, Hyunwoo J.},
+  booktitle ={Proceedings of the 41st International Conference on Machine Learning},
+  year ={2024}
 }
+
 ```
 
 ## Contact
